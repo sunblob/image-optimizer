@@ -837,6 +837,43 @@
     consola "^2.15.0"
     node-fetch "^2.6.1"
 
+"@ogma/common@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@ogma/common/-/common-1.0.0.tgz#0940cf85cf44579bdc7e8c3e07b592dc35db12b8"
+  integrity sha512-IXvSnXbXccpxJR+UbN2fxp30R/44VFpx/T0ungb1PMwLa9BLmtbeQIXqc9TR11gRaDNY0e78tqVckau8oyXK0A==
+
+"@ogma/common@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@ogma/common/-/common-1.1.0.tgz#f9c9d092e4f95abf6be90b3a150eba8c7d5cb7bf"
+  integrity sha512-GJkPfMAMoVbWclFrGzbNFKHzf7669nlpsbLyw+XMPtES/YALJ54WDm47S1kpRhveaYuHK41vc1A8Tl3RT7SM5A==
+
+"@ogma/logger@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@ogma/logger/-/logger-2.4.2.tgz#503194e968ac0aec7aeb72a32f89810bff54ec09"
+  integrity sha512-Ar09HYIlvFzMW0D/clwJqEB7EytqPYZIBURsq57QbyIGSyAp7KVyoICkj3NfUdX/rFbjhnkV5m+cf4UzCD/upg==
+  dependencies:
+    "@ogma/common" "^1.0.0"
+    "@ogma/styler" "^1.0.0"
+
+"@ogma/nestjs-module@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@ogma/nestjs-module/-/nestjs-module-4.2.2.tgz#fbfc80d7dd56f80558834da63999f72fe0657c1b"
+  integrity sha512-kAViWB58Cr8NL3o93Ch5jwni4FlN2zMXlMKxMjaKAGSViSuioK3IcGPluq0K5IxZ08UWHNizi3pb/paFRJeR2Q==
+  dependencies:
+    "@ogma/logger" "^2.4.2"
+
+"@ogma/platform-fastify@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@ogma/platform-fastify/-/platform-fastify-4.0.1.tgz#bb0a55fe8150a92430214304a096ad5ffe16606a"
+  integrity sha512-SW4dlDZvzk1ApKmp3IGpPS8p+4YSc2QTmPr2iBBDnb1ZGnIOIbSlL2urAodmT7lfP8N3KCxT+x1F4edzpbnl7g==
+
+"@ogma/styler@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@ogma/styler/-/styler-1.0.0.tgz#7d4c7c2833f1b5559f64851110cef46529245bc7"
+  integrity sha512-Twtijg2eUS4HEPyic0FEpkdJgRtLSvVow/3gmLsMkyU+GhSm80PnRlc6q1N1rmf1EQhuwGZLKhS30sYIuFV38A==
+  dependencies:
+    "@ogma/common" "1.0.0"
+
 "@sinclair/typebox@^0.24.1":
   version "0.24.51"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.24.51.tgz#645f33fe4e02defe26f2f5c0410e1c094eac7f5f"

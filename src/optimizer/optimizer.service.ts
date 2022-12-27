@@ -3,9 +3,15 @@ import sharp from 'sharp';
 import axios from 'axios';
 import { OptimizeImageQueryDto } from './dto/optimize-image-query.dto';
 import { ImageFormat } from './utils/constants';
+import { OgmaLogger, OgmaService } from '@ogma/nestjs-module';
 
 @Injectable()
 export class OptimizerService {
+  constructor(
+    @OgmaLogger(OptimizerService)
+    private readonly logger: OgmaService,
+  ) {}
+
   async optimizeImage({ src, size, format, quality }: OptimizeImageQueryDto) {
     const imageBuffer = await this.getBufferFromImage(src);
 
@@ -41,6 +47,8 @@ export class OptimizerService {
 
       return Buffer.from(data, 'binary');
     } catch (error) {
+      this.logger.error(error.message, error.stack, 'getBufferFromImage');
+
       throw new HttpException(
         {
           message: `Couldn't get image from ${url}`,

@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsIn, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsEnum, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
 import { ImageFormat } from '../utils/constants';
 
 export class OptimizeImageQueryDto {
@@ -7,7 +7,7 @@ export class OptimizeImageQueryDto {
   src: string;
 
   @IsString()
-  // @IsIn([Object.values(ImageFormat)])
+  @IsEnum(ImageFormat, { each: true })
   format: string;
 
   @Type(() => Number)
