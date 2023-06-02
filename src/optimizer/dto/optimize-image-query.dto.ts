@@ -1,22 +1,19 @@
-import { Type } from 'class-transformer';
-import { IsEnum, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
-import { ImageFormat } from '../utils/constants';
+import { z } from 'zod';
+import { extendApi } from '@anatine/zod-openapi';
+import { createZodDto } from '@anatine/zod-nestjs';
 
-export class OptimizeImageQueryDto {
-  @IsUrl()
-  src: string;
+const ImageZ = extendApi(
+  z.object({
+    url: z.string().url(),
+    format: z.enum(['jpeg', 'webp', 'png', 'jpg', 'avif', 'tiff']).optional(),
+    width: z.coerce.number().optional(),
+    height: z.coerce.number().optional(),
+    quality: z.coerce.number().optional().default(95),
+  }),
+  {
+    title: 'Image',
+    description: 'image',
+  },
+);
 
-  @IsString()
-  @IsEnum(ImageFormat, { each: true })
-  format: string;
-
-  @Type(() => Number)
-  @IsNumber()
-  @IsOptional()
-  size: number;
-
-  @Type(() => Number)
-  @IsNumber()
-  @IsOptional()
-  quality = 95;
-}
+export class ImageQueryDto extends createZodDto(ImageZ) {}

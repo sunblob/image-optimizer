@@ -1,8 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import sharp from 'sharp';
 import axios from 'axios';
-import { OptimizeImageQueryDto } from './dto/optimize-image-query.dto';
-import { ImageFormat } from './utils/constants';
+import { ImageQueryDto } from './dto/optimize-image-query.dto';
 import { OgmaLogger, OgmaService } from '@ogma/nestjs-module';
 
 @Injectable()
@@ -12,31 +11,20 @@ export class OptimizerService {
     private readonly logger: OgmaService,
   ) {}
 
-  async optimizeImage({ src, size, format, quality }: OptimizeImageQueryDto) {
-    const imageBuffer = await this.getBufferFromImage(src);
+  async optimizeImage({ url, width, height, format, quality }: ImageQueryDto) {
+    const imageBuffer = await this.getBufferFromImage(url);
 
-    const { width: originalWidth } = await sharp(imageBuffer).metadata();
+    const {
+      width: originalWidth,
+      height: originalHeight,
+      format: originalFormat,
+    } = await sharp(imageBuffer).metadata();
 
-    if (!size) size = originalWidth;
+    if (!width) width = originalWidth;
+    if (!height) height = originalHeight;
+    if (!format || !format.length) format = originalFormat as typeof format;
 
-    const image = await sharp(imageBuffer).resize({ width: size });
-
-    switch (format) {
-      case ImageFormat.JPEG:
-        image.toFormat('jpeg', { quality });
-        break;
-
-      case ImageFormat.PNG:
-        image.toFormat('png', { quality });
-        break;
-      case ImageFormat.WEBP:
-        image.toFormat('webp', { quality });
-        break;
-      case ImageFormat.AVIF:
-        image.toFormat('avif', { quality });
-      default:
-        break;
-    }
+    const image = await sharp(imageBuffer).resize({ width, height }).toFormat(format, { quality });
 
     return image;
   }
